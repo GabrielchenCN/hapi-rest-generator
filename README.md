@@ -1,6 +1,22 @@
 # generate restful api with hapi v16
 
->A Template for light , quick and easy API generator 
+>A Template for light , quick and easy generate Restful API 
+
+## Getting Started
+
+```
+git clone 
+
+cd /your-dir
+
+mv config.sample.js config.js
+
+npm install 
+
+npm start
+
+```
+
 
 ## Feature
 
@@ -19,7 +35,7 @@
 
 - [ ] Monogo DB support
 
-- [ ] multimedia uploader template/plugins
+- [ ] forward to third party interface
 
 - [ ] OAuth API template/plugins
 
