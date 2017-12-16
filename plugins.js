@@ -5,7 +5,8 @@ const Good = require('good');
 const Inert = require('inert')
 const Vision = require('vision')
 const HapiSwagger = require('hapi-swagger')
-const Test = require('./server/api/test')
+const BasicRestApi = require('./server/api/BasicRestApi')
+const BasicUploadApi = require('./server/api/BasicUploadApi')
 
 const plugins = [
 {
@@ -19,7 +20,8 @@ const plugins = [
         options: Config.plugin.swagger.options
     },
     //api route
-    Test
+    BasicRestApi,
+    BasicUploadApi
 ]
 
 
