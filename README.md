@@ -9,7 +9,7 @@ git clone
 
 cd /your-dir
 
-mv config.sample.js config.js
+cp config.sample.js config.js
 
 npm install 
 
@@ -20,9 +20,13 @@ npm start
 
 ## Feature
 
+- [x] Monogo DB support
+
+- [x] Monogo DB Schema validation support
+
 - [x] Successful response class whoosh inspired by Boom 
 
-- [x] Basic Restful API:provide the sample of basic restful api template
+- [x] Basic Restful API:provide the sample of basic restful api template with MongoDB
 
 - [x] Upload files API:provide the sample of upload files and manage the temp files. which upload with stream or file.
 
@@ -33,13 +37,18 @@ npm start
 ## TODO
 
 
-- [ ] Monogo DB support
+
+- [ ] Monogo DB init script
 
 - [ ] forward to third party interface
+
+- [ ] Add basic validation with Joi in the route
 
 - [ ] OAuth API template/plugins
 
 - [ ] JWT Token template/plugins
+
+- [ ] Configured to drive
 
 ## migrate to v17
 
@@ -48,3 +57,14 @@ npm start
 [hapi]("https://github.com/hapijs")
 
 [aqua]("https://github.com/jedireza/aqua")
+
+##reference
+
+- install nodejs
+
+- install nvm
+
+- [install mongodb]("https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/")
+
+- [hapi-api]("https://github.com/rjmreis/hapi-api")
+

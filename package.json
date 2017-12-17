@@ -17,6 +17,7 @@
     "hapi": "16.6.2",
     "hapi-swagger": "7.9.0",
     "inert": "4.2.1",
+    "mongoose": "^4.13.7",
     "multiparty": "^4.1.3",
     "vision": "4.1.0"
   }

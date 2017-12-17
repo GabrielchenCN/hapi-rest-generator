@@ -1,6 +1,7 @@
 'use strict';
 const Boom = require('boom');
 const Whoosh = require('../utils/whoosh');
+const Handler = require('./handlers/BasicRestHandler');
 
 const BasicRestApiPlugin = {
     register: function(server, options, next) {
@@ -17,51 +18,60 @@ const BasicRestApiPlugin = {
                 reply(Whoosh.OK());
             }
         });
-
         server.route({
             method: 'GET',
-            path: '/withMandatoryParam/{Params}',
+            path: '/users',
             config: {
                 tags: ['api'], // ADD THIS TAG
 
             },
-            handler: function(request, reply) {
-                const sParams = request.params.Params;
-                if (!sParams) {
-
-                    reply(Boom.badRequest('invalid query'));
-                } else {
-                    // if not encodeURIComponent, will be attack by content injection attacks
-                    // reply({ Params: encodeURIComponent(sParams) });
-                    reply(Whoosh.OK({ Params: sParams }));
-                }
-
-            }
+            handler: Handler.GetUsers.handler
         });
-
         server.route({
             method: 'GET',
-            path: '/withOptionalParam/{Params?}',
+            path: '/user/{_id}',
             config: {
                 tags: ['api'], // ADD THIS TAG
 
             },
-            handler: function(request, reply) {
-                const sParams = request.params.Params;
-                // if not encodeURIComponent, will be attack by content injection attacks
-                // reply({ Params: sParams });
-                // reply({ Params: encodeURIComponent(sParams) });
-                reply(Whoosh.OK({ Params: sParams }));
-            }
+            handler: Handler.GetUser.handler
         });
+        server.route({
+            method: 'POST',
+            path: '/user',
+            config: {
+                tags: ['api'], // ADD THIS TAG
+
+            },
+            handler: Handler.SaveUsers.handler
+        });
+        server.route({
+            method: 'PUT',
+            path: '/user',
+            config: {
+                tags: ['api'], // ADD THIS TAG
+
+            },
+            handler: Handler.PutUsers.handler
+        });
+        server.route({
+            method: 'DELETE',
+            path: '/user',
+            config: {
+                tags: ['api'], // ADD THIS TAG
+
+            },
+            handler: Handler.DelUsers.handler
+        });
+
         /* 
-      	 The supported mime types are:
+         The supported mime types are:
         application/json
-		application/x-www-form-urlencoded
-		application/octet-stream
-		text/*
-		multipart/form-data
-		*/
+        application/x-www-form-urlencoded
+        application/octet-stream
+        text/*
+        multipart/form-data
+        */
         server.route({
             method: 'POST',
             path: '/parse/user',
@@ -83,23 +93,7 @@ const BasicRestApiPlugin = {
                 response.statusCode = Whoosh.Created().statusCode;
             }
         });
-        server.route({
-            method: 'POST',
-            path: '/user',
-            config: {
-                tags: ['api'], // ADD THIS TAG
 
-
-
-            },
-            handler: function(request, reply) {
-                const oPayload = request.payload;
-
-                const response = reply(Whoosh.Created(oPayload));
-                response.statusCode = Whoosh.Created().statusCode;
-            }
-        });
-     
         server.route({
             method: 'get',
             path: '/badRequest',
