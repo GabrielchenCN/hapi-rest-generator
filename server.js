@@ -48,7 +48,7 @@ mongodb.connector.once('open', function() {
             if (err) {
                 throw err;
             }
-             server.log('info', 'mongodb connected at: ' + Config.mongodb.uri);
+            server.log('info', 'mongodb connected at: ' + Config.mongodb.uri);
             server.log('info', 'Server running at: ' + server.info.uri);
             server.log('info', 'Swagger running at: ' + Config.swagger.uri);
         });

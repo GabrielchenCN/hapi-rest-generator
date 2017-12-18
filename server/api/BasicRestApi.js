@@ -2,6 +2,7 @@
 const Boom = require('boom');
 const Whoosh = require('../utils/whoosh');
 const Handler = require('./handlers/BasicRestHandler');
+const Joi = require('joi');
 
 const BasicRestApiPlugin = {
     register: function(server, options, next) {
@@ -32,7 +33,11 @@ const BasicRestApiPlugin = {
             path: '/user/{_id}',
             config: {
                 tags: ['api'], // ADD THIS TAG
-
+                validate: {
+                    query: {
+                        _id: Joi.string().allow('')
+                    }
+                }
             },
             handler: Handler.GetUser.handler
         });
@@ -41,6 +46,13 @@ const BasicRestApiPlugin = {
             path: '/user',
             config: {
                 tags: ['api'], // ADD THIS TAG
+                validate: {
+                    payload: {
+                        name: Joi.string().token(),
+                        age: Joi.number(),
+                        email:Joi.string().email().required()
+                    }
+                },
 
             },
             handler: Handler.SaveUsers.handler
@@ -50,6 +62,14 @@ const BasicRestApiPlugin = {
             path: '/user',
             config: {
                 tags: ['api'], // ADD THIS TAG
+                validate: {
+                    payload: {
+                        _id:Joi.string().required(),
+                        name: Joi.string().token(),
+                        age: Joi.number(),
+                        email:Joi.string().email().required()
+                    }
+                },
 
             },
             handler: Handler.PutUsers.handler
@@ -59,6 +79,14 @@ const BasicRestApiPlugin = {
             path: '/user',
             config: {
                 tags: ['api'], // ADD THIS TAG
+                 validate: {
+                    payload: {
+                        _id:Joi.string().required(),
+                        name: Joi.string().token(),
+                        age: Joi.number(),
+                        email:Joi.string().email().required()
+                    }
+                },
 
             },
             handler: Handler.DelUsers.handler

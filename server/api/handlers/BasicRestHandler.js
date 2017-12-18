@@ -78,7 +78,7 @@ module.exports.DelUsers = {
         const oPayload = request.payload;
         User.findOneAndRemove(oPayload, function(err, docs) {
             if (err) return reply(Boom.badRequest());
-            reply(Whoosh.OK(docs));
+            reply(Whoosh.Del(docs));
         })
 
     }

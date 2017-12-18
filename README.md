@@ -34,21 +34,26 @@ npm start
 
 - [x] Swagger support:Integrate the swagger with enter http://< your host >:< your port >/documentation
 
+- [x] Add basic validation with Joi in the route
+
+
 ## TODO
 
+- [x] Simple Token Validation API template/plugins
 
+- [ ] Enhance Swagger
 
 - [ ] Monogo DB init script
 
 - [ ] forward to third party interface
-
-- [ ] Add basic validation with Joi in the route
 
 - [ ] OAuth API template/plugins
 
 - [ ] JWT Token template/plugins
 
 - [ ] Configured to drive
+
+- [ ] run in the production environment
 
 ## migrate to v17
 
@@ -58,7 +63,7 @@ npm start
 
 [aqua]("https://github.com/jedireza/aqua")
 
-##reference
+## reference
 
 - install nodejs
 
@@ -67,4 +72,15 @@ npm start
 - [install mongodb]("https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/")
 
 - [hapi-api]("https://github.com/rjmreis/hapi-api")
+
+- npm install supervisor -g
+
+
+##CV
+
+https://codepen.io/jakealbaugh/pen/PwLXXP
+
+https://github.com/STRML/strml.net
+
+https://jirengu-inc.github.io/animating-resume/public/
 

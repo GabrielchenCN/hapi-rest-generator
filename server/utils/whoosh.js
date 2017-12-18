@@ -24,6 +24,9 @@ class Whoosh {
     static OK(data,message) {
         return this.create(200, message, data)
     }
+    static Del(data,message) {
+        return this.create(202, 'Delete', data)
+    }
 
     static Created(data,message) {
         return this.create(201, message, data)

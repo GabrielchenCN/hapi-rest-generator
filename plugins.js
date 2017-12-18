@@ -7,9 +7,9 @@ const Vision = require('vision')
 const HapiSwagger = require('hapi-swagger')
 const BasicRestApi = require('./server/api/BasicRestApi')
 const BasicUploadApi = require('./server/api/BasicUploadApi')
+const TokenAuthApi = require('./server/api/TokenAuthApi')
 
-const plugins = [
-{
+const plugins = [{
         register: Good,
         options: Config.plugin.Good.options
     },
@@ -21,7 +21,8 @@ const plugins = [
     },
     //api route
     BasicRestApi,
-    BasicUploadApi
+    BasicUploadApi,
+    TokenAuthApi
 ]
 
 
