@@ -64,7 +64,7 @@ module.exports.SaveUsers = {
 module.exports.PutUsers = {
     handler: function(request, reply) {
         const oPayload = request.payload;
-        User.findOneAndUpdate(oPayload._id, oPayload, { new: true }, function(err, docs) {
+        User.findOneAndUpdate({'_id':oPayload._id}, oPayload, { new: true }, function(err, docs) {
             if (err) return reply(Boom.badRequest());
             reply(Whoosh.OK(docs));
         })

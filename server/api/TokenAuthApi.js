@@ -4,6 +4,7 @@ const Whoosh = require('../utils/whoosh');
 // const Handler = require('./handlers/TokenAuthHandler');
 const Joi = require('joi');
 const User = require('../models/user');
+const Session = require('../models/session');
 const crypto = require('crypto');
 
 
@@ -26,6 +27,7 @@ const TokenAuthApiPlugin = {
                 let email = request.payload.email;
                 let res = null;
                 let docPOJO = null;
+                let oSession = null;
                 User.findOne({ email: email }, function(err, docs) {
 
                     if (err) return reply(Boom.badRequest());
@@ -34,8 +36,22 @@ const TokenAuthApiPlugin = {
                     } else {
                         docPOJO = docs.toObject();
                         res = Object.assign({}, docPOJO, { token: UUIDGenerator() });
-                        console.log(res);
-                        reply(Whoosh.OK(res));
+                        oSession = new Session({ _user: docs, token: res.token });
+                        Session.findOneAndUpdate({'_user':docs},{ 'token':oSession.toObject().token}, { new: true}, function(err, docs) {
+                        	console.log(docs);
+                            if (err) {
+                                
+                                return reply(Boom.badRequest());
+                            }
+                            if (!docs) {
+                                oSession.save();
+                                console.log("-------------not match------------")
+                                reply(Whoosh.Created(res));
+                            } else {
+                                reply(Whoosh.OK(res));
+                            }
+                        })
+
                     }
 
                 })
