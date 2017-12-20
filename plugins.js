@@ -1,13 +1,14 @@
 'use strict'
 
 const Config = require('./pluginsConfig')
-const Good = require('good');
+const Good = require('good')
 const Inert = require('inert')
 const Vision = require('vision')
 const HapiSwagger = require('hapi-swagger')
 const BasicRestApi = require('./server/api/BasicRestApi')
 const BasicUploadApi = require('./server/api/BasicUploadApi')
 const TokenAuthApi = require('./server/api/TokenAuthApi')
+const StaticServerPlugin = require('./server/api/StaticFilesHandler')
 
 const plugins = [{
         register: Good,
@@ -19,6 +20,8 @@ const plugins = [{
         register: HapiSwagger,
         options: Config.plugin.swagger.options
     },
+    //static server handler
+    StaticServerPlugin,
     //api route
     BasicRestApi,
     BasicUploadApi,

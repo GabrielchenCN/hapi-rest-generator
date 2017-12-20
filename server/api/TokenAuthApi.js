@@ -1,7 +1,7 @@
 'use strict';
 const Boom = require('boom');
 const Whoosh = require('../utils/whoosh');
-// const Handler = require('./handlers/TokenAuthHandler');
+const Handler = require('./handlers/AuthHandler');
 const Joi = require('joi');
 const User = require('../models/user');
 const Session = require('../models/session');
@@ -19,53 +19,49 @@ const TokenAuthApiPlugin = {
                 validate: {
                     payload: {
                         email: Joi.string().email().required(),
-                        password: Joi.string().min(6).max(12).required(),
+                        password: Joi.string().min(6).max(12).required()
                     }
                 },
             },
-            handler: function(request, reply) {
-                let email = request.payload.email;
-                let res = null;
-                let docPOJO = null;
-                let oSession = null;
-                User.findOne({ email: email }, function(err, docs) {
+            handler: Handler.tokenAuth.handler
+        });
 
-                    if (err) return reply(Boom.badRequest());
-                    if (!docs) {
-                        reply(Whoosh.NoContent(docs, 'user is not exist'));
-                    } else {
-                        docPOJO = docs.toObject();
-                        res = Object.assign({}, docPOJO, { token: UUIDGenerator() });
-                        oSession = new Session({ _user: docs, token: res.token });
-                        Session.findOneAndUpdate({'_user':docs},{ 'token':oSession.toObject().token}, { new: true}, function(err, docs) {
-                        	console.log(docs);
-                            if (err) {
-                                
-                                return reply(Boom.badRequest());
-                            }
-                            if (!docs) {
-                                oSession.save();
-                                console.log("-------------not match------------")
-                                reply(Whoosh.Created(res));
-                            } else {
-                                reply(Whoosh.OK(res));
-                            }
-                        })
+        server.route({
+            method: 'POST',
+            path: '/wxlogin',
+            config: {
+                tags: ['api'], // ADD THIS TAG
+                validate: {
+                    payload: {
+                        code: Joi.string().required(),
+                    }
+                },
+            },
+            handler: Handler.wxLogin.handler
+        });
+
+        server.route({
+            method: 'POST',
+            path: '/wxUser',
+            config: {
+                tags: ['api'], // ADD THIS TAG
+                validate: {
+                    payload: {
+                        rawData: Joi.string().required(),
+                        signature: Joi.string().required(),
+                        encryptedData: Joi.string().required(),
+                        iv: Joi.string().required()
 
                     }
-
-                })
-            }
+                },
+            },
+            handler: Handler.wxUser.handler
         });
 
 
         next();
     }
 };
-const UUIDGenerator = () =>
-    ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
-        (c ^ crypto.randomBytes(256)[0] & 15 >> c / 4).toString(16)
-    );
 
 
 TokenAuthApiPlugin.register.attributes = {

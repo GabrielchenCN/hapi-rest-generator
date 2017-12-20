@@ -36,10 +36,15 @@ npm start
 
 - [x] Add basic validation with Joi in the route
 
+- [x] static files server
+
 
 ## TODO
 
 - [x] Simple Token Validation API template/plugins
+
+- [x] wechat login integration:save wx user , get session_key use code, decryption encryptedData.
+
 
 - [ ] Enhance Swagger
 

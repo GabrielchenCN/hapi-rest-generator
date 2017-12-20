@@ -7,18 +7,18 @@ const Joi = require('joi');
 const BasicRestApiPlugin = {
     register: function(server, options, next) {
 
-        server.route({
-            method: 'GET',
-            path: '/',
-            config: {
-                tags: ['api'], // ADD THIS TAG
+        // server.route({
+        //     method: 'GET',
+        //     path: '/',
+        //     config: {
+        //         tags: ['api'], // ADD THIS TAG
 
-            },
-            handler: function(request, reply) {
+        //     },
+        //     handler: function(request, reply) {
 
-                reply(Whoosh.OK());
-            }
-        });
+        //         reply(Whoosh.OK());
+        //     }
+        // });
         server.route({
             method: 'GET',
             path: '/users',
