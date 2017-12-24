@@ -9,6 +9,7 @@ const BasicRestApi = require('./server/api/BasicRestApi')
 const BasicUploadApi = require('./server/api/BasicUploadApi')
 const TokenAuthApi = require('./server/api/TokenAuthApi')
 const StaticServerPlugin = require('./server/api/StaticFilesHandler')
+const FaceRecognitionApiPlugin = require('./server/api/FaceRecognitionApi')
 
 const plugins = [{
         register: Good,
@@ -25,7 +26,8 @@ const plugins = [{
     //api route
     BasicRestApi,
     BasicUploadApi,
-    TokenAuthApi
+    TokenAuthApi,
+    FaceRecognitionApiPlugin
 ]
 
 

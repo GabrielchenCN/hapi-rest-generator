@@ -4,6 +4,7 @@ const Whoosh = require('../utils/whoosh');
 const multiparty = require('multiparty');
 const fs = require('fs');
 const stream = require('stream');
+const Joi = require('joi');
 
 const BasicRestApiPlugin = {
     register: function(server, options, next) {
@@ -22,7 +23,13 @@ const BasicRestApiPlugin = {
                     maxBytes: 1048576,
                     parse: true,
                     output: 'file'
-                }
+                },
+                validate: {
+                    payload: {
+                        file: Joi.object().required().meta({ swaggerType: 'file' }),
+                        name: Joi.string()
+                    }
+                },
             },
             handler: function(request, reply) {
                 const oPayload = request.payload.file;
@@ -55,7 +62,8 @@ const BasicRestApiPlugin = {
                     maxBytes: 209715200,
                     parse: false,
                     output: 'stream',
-                }
+                },
+
             },
             handler: function(requset, reply) {
                 var form = new multiparty.Form();
@@ -72,6 +80,7 @@ const BasicRestApiPlugin = {
             }
 
         });
+        //body:{file:"",name:""}
         server.route({
             method: 'POST',
             path: '/stream/parse/file/',
@@ -87,7 +96,13 @@ const BasicRestApiPlugin = {
                     parse: true,
                     output: 'stream',
                     allow: 'multipart/form-data'
-                }
+                },
+                validate: {
+                    payload: {
+                        file: Joi.object().required().meta({ swaggerType: 'file' }),
+                        name: Joi.string()
+                    }
+                },
             },
             handler: function(requset, reply) {
                 console.log(requset.payload.name);

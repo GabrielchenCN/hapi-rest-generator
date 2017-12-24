@@ -38,6 +38,9 @@ npm start
 
 - [x] static files server
 
+- [x] Enhance Swagger:form-data and file upload example
+
+- [x] Face recognition API:microsoft azure , face++.
 
 ## TODO
 

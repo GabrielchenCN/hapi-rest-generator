@@ -50,7 +50,7 @@ const BasicRestApiPlugin = {
                     payload: {
                         name: Joi.string().token(),
                         age: Joi.number(),
-                        email:Joi.string().email().required()
+                        email: Joi.string().email().required().description('the email is mandatory'),
                     }
                 },
 
@@ -64,10 +64,10 @@ const BasicRestApiPlugin = {
                 tags: ['api'], // ADD THIS TAG
                 validate: {
                     payload: {
-                        _id:Joi.string().required(),
+                        _id: Joi.string().required(),
                         name: Joi.string().token(),
                         age: Joi.number(),
-                        email:Joi.string().email().required()
+                        email: Joi.string().email().required()
                     }
                 },
 
@@ -79,12 +79,12 @@ const BasicRestApiPlugin = {
             path: '/user',
             config: {
                 tags: ['api'], // ADD THIS TAG
-                 validate: {
+                validate: {
                     payload: {
-                        _id:Joi.string().required(),
+                        _id: Joi.string().required(),
                         name: Joi.string().token(),
                         age: Joi.number(),
-                        email:Joi.string().email().required()
+                        email: Joi.string().email().required()
                     }
                 },
 
@@ -109,7 +109,14 @@ const BasicRestApiPlugin = {
                 payload: {
                     output: 'data',
                     parse: true,
-                }
+                },
+                validate: {
+                    payload: {
+                        name: Joi.string().token(),
+                        age: Joi.number(),
+                        email: Joi.string().email().required()
+                    }
+                },
 
             },
             handler: function(request, reply) {
