@@ -24,6 +24,11 @@ const BasicRestApiPlugin = {
             path: '/users',
             config: {
                 tags: ['api'], // ADD THIS TAG
+                plugins: {
+                    hapiAclAuth: {
+                        roles: ['USER']
+                    }
+                }
 
             },
             handler: Handler.GetUsers.handler
@@ -36,6 +41,11 @@ const BasicRestApiPlugin = {
                 validate: {
                     query: {
                         _id: Joi.string().allow('')
+                    }
+                },
+                 plugins: {
+                    hapiAclAuth: {
+                        roles: ['USER']
                     }
                 }
             },
@@ -53,6 +63,11 @@ const BasicRestApiPlugin = {
                         email: Joi.string().email().required().description('the email is mandatory'),
                     }
                 },
+                 plugins: {
+                    hapiAclAuth: {
+                        roles: ['ADMIN']
+                    }
+                }
 
             },
             handler: Handler.SaveUsers.handler
@@ -70,6 +85,11 @@ const BasicRestApiPlugin = {
                         email: Joi.string().email().required()
                     }
                 },
+                 plugins: {
+                    hapiAclAuth: {
+                        roles: ['ADMIN']
+                    }
+                }
 
             },
             handler: Handler.PutUsers.handler
@@ -87,6 +107,11 @@ const BasicRestApiPlugin = {
                         email: Joi.string().email().required()
                     }
                 },
+                 plugins: {
+                    hapiAclAuth: {
+                        roles: ['ADMIN']
+                    }
+                }
 
             },
             handler: Handler.DelUsers.handler

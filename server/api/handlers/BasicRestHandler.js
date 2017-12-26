@@ -48,9 +48,9 @@ module.exports.GetUser = {
 
 module.exports.SaveUsers = {
     handler: function(request, reply) {
-        const oPayload = request.payload;
-        const user = new User(oPayload);
-        user.save(function(err, docs) {
+        let oPayload = request.payload;
+        oPayload.roles =['USER'];
+        User.findOneAndUpdate({'email':oPayload.email},oPayload,{ upsert: true, new: true },function(err, docs) {
             if (err) return reply(Boom.badRequest());
             reply(Whoosh.Created(docs)).code(201);
             // response.statusCode = Whoosh.Created().statusCode;

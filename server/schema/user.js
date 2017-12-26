@@ -5,6 +5,7 @@ const UserSchema = mongoose.Schema({
     email: { type: String, required: true,unique: true , validate: /\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}\b/ },
     name: String,
     age: String,
+    roles:[{ type: String, enum: ['USER','ADMIN'] }],
     createdAt: { type: Date,default: Date.now, expires: '1.5h' },
 }, { collection: 'user' });
 

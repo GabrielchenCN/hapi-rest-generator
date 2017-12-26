@@ -22,6 +22,11 @@ const TokenAuthApiPlugin = {
                         password: Joi.string().min(6).max(12).required()
                     }
                 },
+                plugins: {
+                    hapiAclAuth: {
+                        secure: false
+                    }
+                }
             },
             handler: Handler.tokenAuth.handler
         });

@@ -15,6 +15,7 @@
     "good-console": "^6.4.1",
     "good-squeeze": "^5.0.2",
     "hapi": "16.6.2",
+    "hapi-acl-auth": "^0.5.1",
     "hapi-swagger": "7.9.0",
     "inert": "4.2.1",
     "joi": "^13.0.2",

@@ -36,24 +36,25 @@ npm start
 
 - [x] Add basic validation with Joi in the route
 
-- [x] static files server
+- [x] Static files server
 
 - [x] Enhance Swagger:form-data and file upload example
 
 - [x] Face recognition API:microsoft azure , face++.
 
-## TODO
-
 - [x] Simple Token Validation API template/plugins
+
+## TODO
 
 - [x] wechat login integration:save wx user , get session_key use code, decryption encryptedData.
 
+- [ ] Support websocket
 
 - [ ] Enhance Swagger
 
 - [ ] Monogo DB init script
 
-- [ ] forward to third party interface
+- [ ] Forward to third party interface
 
 - [ ] OAuth API template/plugins
 
@@ -84,7 +85,7 @@ npm start
 - npm install supervisor -g
 
 
-##CV
+## CV
 
 https://codepen.io/jakealbaugh/pen/PwLXXP
 
