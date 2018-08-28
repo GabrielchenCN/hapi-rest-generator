@@ -85,11 +85,3 @@ npm start
 - npm install supervisor -g
 
 
-## CV
-
-https://codepen.io/jakealbaugh/pen/PwLXXP
-
-https://github.com/STRML/strml.net
-
-https://jirengu-inc.github.io/animating-resume/public/
-
